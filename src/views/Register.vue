@@ -10,7 +10,7 @@
               class="profile-img-card"
             />
 
-            <h3 class="title">Login</h3>
+            <h3 class="title">Register</h3>
 
             <form class="form-horizontal">
               <div class="form-group">
@@ -52,7 +52,7 @@
   background: #ecf0f3;
   font-family: "Nunito", sans-serif;
   padding: 40px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
 .form-container .form-icon {
@@ -63,7 +63,7 @@
   width: 100px;
   height: 100px;
   margin: 0 auto 15px;
-  border-radius: 50px;
+  /* border-radius: 50px; */
   box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
 }
 .form-container .title {
@@ -91,7 +91,7 @@
   padding: 20px;
   letter-spacing: 1px;
   border: none;
-  border-radius: 50px;
+  /* border-radius: 50px; */
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
   display: inline-block;
   transition: all 0.3s ease 0s;
@@ -112,7 +112,7 @@
   text-transform: uppercase;
   width: 100%;
   padding: 12px 15px 11px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
   border: none;
   transition: all 0.5s ease 0s;
