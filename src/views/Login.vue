@@ -12,12 +12,13 @@
 
             <h3 class="title">Login</h3>
 
-            <form class="form-horizontal">
+            <form @submit.prevent="login" class="form-horizontal">
               <div class="form-group">
                 <label>email</label>
                 <input
                   class="form-control"
                   type="email"
+                  v-model="email"
                   placeholder="email address"
                 />
               </div>
@@ -27,10 +28,19 @@
                 <input
                   class="form-control"
                   type="password"
+                  v-model="password"
                   placeholder="password"
                 />
               </div>
-              <button type="button" class="btn btn-default">Login</button>
+              <router-link :to="{ name: 'Products' }">
+                <button type="button" class="btn btn-default">Login</button>
+              </router-link>
+              <p>
+                <br />
+                <router-link :to="{ name: 'Register' }">
+                  <button type="button" class="btn btn-default">Sign up</button>
+                </router-link>
+              </p>
             </form>
           </div>
         </div>

@@ -27,15 +27,6 @@
   <router-view />
 </template>
 
-
-<script>
-// import Products from "@/views/Products.vue";
-// export default {
-//   components: {
-//     Products,
-//   },
-// };
-</script>
 <style>
 #nav {
   padding: 30px;

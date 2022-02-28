@@ -103,37 +103,29 @@
           <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
             Close
           </button>
-          <button
-            type="button"
-            class="btn"
-            data-bs-dismiss="modal"
-            onclick="createWatch()"
-          >
-            Save changes
-          </button>
+          <button type="button" class="btn">Save changes</button>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <div class="card" style="width: 18rem">
-        <img src="" class="card-img-top" alt="" />
+      <div
+        v-for="product in products"
+        :key="product.id"
+        class="card"
+        style="width: 18rem"
+      >
+        <img :src="product.img" class="card-img-top" alt="" />
         <div class="card-body">
-          <h5 class="card-name">Name</h5>
+          <h5>{{ product.name }}</h5>
           <p class="card-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
           <div class="content">
             <div class="buttons">
-              <button
-                class="btn btn-dark"
-                data-bs-toggle="modal"
-                data-bs-target="#update-modal-${position}"
-              >
-                EDIT
-              </button>
+              <button class="btn btn-dark">EDIT</button>
               <button class="btn btn-danger">DELETE</button>
               <button class="btn btn-danger">ADD TO CART</button>
             </div>
@@ -146,8 +138,17 @@
 
 <script>
 export default {
-  name: "",
-  props: {},
+  data() {
+    return {
+      products: [],
+    };
+  },
+  mounted() {
+    fetch("http://localhost:3000")
+      .then((res) => res.json())
+      .then((data) => (this.products = data))
+      .catch((err) => console.log(err.message));
+  },
 };
 </script>
 

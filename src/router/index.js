@@ -1,24 +1,20 @@
 // imports 
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/views/Home.vue";
+import Home from "../views/Home.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Products from "@/views/Products.vue";
-import Cart from "@/components/Cart.vue";
+import Cart from "@/views/Cart.vue";
 
 
 
 // lazy-loaded --only load when needed 
-const Profile = () => import("@/views/Profile.vue")
-// const BoardAdmin = () => import("@/components/BoardAdmin.vue")
-// const BoardModerator = () => import("@/components/BoardModerator.vue")
-const BoardUser = () => import("@/components/BoardUser.vue")
-const routes = [
 
+const routes = [
   {
     path: "/cart",
     component: Cart,
-    name: "cart"
+    name: "Cart"
   },
   {
 
@@ -29,55 +25,37 @@ const routes = [
   {
     path: "/login",
     component: Login,
-    name: "login"
+    name: "Login"
   },
   {
     path: "/register",
     component: Register,
-    name: "register"
+    name: "Register"
   },
   {
     path: "/products",
     component: Products,
-    name: "products",
+    name: "Products",
 
   },
 
-  {
-    path: "/profile",
-    name: "profile",
-    // lazy-loaded
-    component: Profile,
-  },
 
-  {
-    path: "/user",
-    name: "user",
-    // lazy-loaded
-    component: BoardUser,
-  },
 ];
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+// router.beforeEach((to, from, next) => {
+//   const publicPages = ['/login', '/register', '/home'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem('user');
+//   if (authRequired && !loggedIn) {
+//     next('/login');
+//   } else {
+//     next();
+//   }
+// });
 
-// before security allow user to ...// to-acess the / array
-router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home', '/products', '/cart'];
-
-  // if its true have any of the array in then complete process
-  const authRequired = !publicPages.includes(to.path);
-  // stores token is usre login
-  const loggedIn = localStorage.getItem('user');
-  // trying to access a restricted page + not logged in
-  // redirect to login page
-  if (authRequired && !loggedIn) {
-    next('/login');
-  } else {
-    next();
-  }
-});
 
 export default router;
 

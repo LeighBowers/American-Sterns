@@ -12,16 +12,22 @@
 
             <h3 class="title">Register</h3>
 
-            <form class="form-horizontal">
+            <form @submit.prevent="login" class="form-horizontal">
               <div class="form-group">
                 <label>name</label>
-                <input class="form-control" type="name" placeholder="name" />
+                <input
+                  class="form-control"
+                  type="name"
+                  v-model="name"
+                  placeholder="name"
+                />
               </div>
               <div class="form-group">
                 <label>email</label>
                 <input
                   class="form-control"
                   type="email"
+                  v-model="email"
                   placeholder="email address"
                 />
               </div>
@@ -31,10 +37,16 @@
                 <input
                   class="form-control"
                   type="password"
+                  v-model="password"
                   placeholder="password"
                 />
               </div>
-              <button type="button" class="btn btn-default">Login</button>
+              <router-link :to="{ name: 'Login' }">
+                <button type="button" class="btn btn-default">Login</button>
+              </router-link>
+              <p>
+                <router-link :to="{ name: 'Login' }"> </router-link>
+              </p>
             </form>
           </div>
         </div>

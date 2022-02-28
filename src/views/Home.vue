@@ -5,20 +5,10 @@
       <p class="text">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus velit
       </p>
-      <!-- <Products /> -->
     </div>
   </div>
 </template>
 <script>
-// import Products from "./Products.vue";
-// export default {
-//   data() {
-//     return {};
-//   },
-//   components: {
-//     Products,
-//   },
-// };
 </script>
 <style scoped>
 * {
