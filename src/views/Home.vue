@@ -5,20 +5,20 @@
       <p class="text">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus velit
       </p>
-      <Products />
+      <!-- <Products /> -->
     </div>
   </div>
 </template>
 <script>
-import Products from "./Products.vue";
-export default {
-  data() {
-    return {};
-  },
-  components: {
-    Products,
-  },
-};
+// import Products from "./Products.vue";
+// export default {
+//   data() {
+//     return {};
+//   },
+//   components: {
+//     Products,
+//   },
+// };
 </script>
 <style scoped>
 * {
@@ -47,7 +47,7 @@ body {
 .inner-container {
   width: 55%;
   float: right;
-  background-color: #915e5e;
+  background-color: #db2e2eb6;
   padding: 150px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">American Sterns</a>
       <button
@@ -11,14 +11,15 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <span class="navbar-toggler-icon"></span></button
+      ><br />
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link to="/home" class="nav-item nav-link">Home</router-link>
           <router-link to="/login" class="nav-item nav-link">Login</router-link>
           <router-link to="/register" class="nav-link">Register</router-link>
           <router-link to="/products" class="nav-link">Products</router-link>
+          <router-link to="/cart" class="nav-link">Cart</router-link>
         </div>
       </div>
     </div>
@@ -28,12 +29,12 @@
 
 
 <script>
-import Products from "@/views/Products.vue";
-export default {
-  components: {
-    Products,
-  },
-};
+// import Products from "@/views/Products.vue";
+// export default {
+//   components: {
+//     Products,
+//   },
+// };
 </script>
 <style>
 #nav {

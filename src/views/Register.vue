@@ -56,7 +56,7 @@
   box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
 .form-container .form-icon {
-  color: #ac40ab;
+  color: #fa211ab0;
   font-size: 55px;
   text-align: center;
   line-height: 100px;
@@ -67,7 +67,7 @@
   box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
 }
 .form-container .title {
-  color: #ac40ab;
+  color: #fa211aad;
   font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
@@ -106,7 +106,7 @@
 }
 .form-container .form-horizontal .btn {
   color: #000;
-  background-color: #ac40ab;
+  background-color: #fa211abe;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;

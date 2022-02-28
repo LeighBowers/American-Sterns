@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Products from "@/views/Products.vue";
+import Cart from "@/components/Cart.vue";
 
 
 
@@ -13,16 +14,12 @@ const Profile = () => import("@/views/Profile.vue")
 // const BoardModerator = () => import("@/components/BoardModerator.vue")
 const BoardUser = () => import("@/components/BoardUser.vue")
 const routes = [
+
   {
-    path: "/products",
-    name: "products",
-    component: Products,
+    path: "/cart",
+    component: Cart,
+    name: "cart"
   },
-  // {
-  //   path: "/products",
-  //   component: Products,
-  //   name: "products"
-  // },
   {
 
     path: "/home",
@@ -38,6 +35,12 @@ const routes = [
     path: "/register",
     component: Register,
     name: "register"
+  },
+  {
+    path: "/products",
+    component: Products,
+    name: "products",
+
   },
 
   {
@@ -61,7 +64,7 @@ const router = createRouter({
 
 // before security allow user to ...// to-acess the / array
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home', '/products'];
+  const publicPages = ['/login', '/register', '/home', '/products', '/cart'];
 
   // if its true have any of the array in then complete process
   const authRequired = !publicPages.includes(to.path);
