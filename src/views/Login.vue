@@ -33,15 +33,13 @@
                   placeholder="password"
                 />
               </div>
-              <router-link :to="{ name: 'Products' }">
-                <button type="button" class="btn btn-default">Login</button>
-              </router-link>
-              <p>
-                <br />
-                <router-link :to="{ name: 'Register' }">
-                  <button type="button" class="btn btn-default">Sign up</button>
-                </router-link>
-              </p>
+              <button type="button" class="btn btn-default">Login</button>
+              <!-- <router-link :to="{ name: 'Products' }">
+                <button type="submit" class="btn btn-default">Login</button>
+              </router-link> -->
+
+              <br />
+              <router-link :to="{ name: 'Register' }"> </router-link>
             </form>
             <!-- </div> -->
           </div>
@@ -62,14 +60,32 @@
 export default {
   data() {
     return {
-      users: [],
+      email: "",
+      password: "",
     };
   },
-  mounted() {
-    fetch("https://american-sterns.herokuapp.com/users")
-      .then((res) => res.json())
-      .then((data) => (this.users = data))
-      .catch((err) => console.log(err.message));
+  methods: {
+    register() {
+      fetch("https://american-sterns.herokuapp.com/users", {
+        method: "POST",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          localStorage.setItem("jwt", json.jwt);
+          alert("User Login");
+          this.$router.push({ name: "Products" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
   },
 };
 </script>

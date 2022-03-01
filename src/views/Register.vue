@@ -13,44 +13,40 @@
             <h3 class="title">Register</h3>
 
             <form @submit.prevent="login" class="form-horizontal">
-              <div v-if="!successful">
-                <div class="form-group">
-                  <label>name</label>
-                  <input
-                    class="form-control"
-                    type="name"
-                    v-model="name"
-                    placeholder="name"
-                  />
-                </div>
-                <div class="form-group">
-                  <label>email</label>
-                  <input
-                    class="form-control"
-                    type="email"
-                    v-model="email"
-                    placeholder="email address"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label>password</label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    v-model="password"
-                    placeholder="password"
-                  />
-                </div>
-                <router-link :to="{ name: 'Login' }">
-                  <button type="button" class="btn btn-default">
-                    Register
-                  </button>
-                </router-link>
-                <p>
-                  <router-link :to="{ name: 'Login' }"> </router-link>
-                </p>
+              <div class="form-group">
+                <label>name</label>
+                <input
+                  class="form-control"
+                  type="name"
+                  v-model="name"
+                  placeholder="name"
+                />
               </div>
+              <div class="form-group">
+                <label>email</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  v-model="email"
+                  placeholder="email address"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>password</label>
+                <input
+                  class="form-control"
+                  type="password"
+                  v-model="password"
+                  placeholder="password"
+                />
+              </div>
+              <router-link :to="{ name: 'Login' }">
+                <button type="button" class="btn btn-default">Register</button>
+              </router-link>
+              <!-- <p>
+                <router-link :to="{ name: 'Login' }"> </router-link>
+              </p> -->
             </form>
           </div>
         </div>
@@ -58,6 +54,41 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    register() {
+      fetch("https://american-sterns.herokuapp.com/users", {
+        method: "POST",
+        body: JSON.stringify({
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          alert("User registered");
+          localStorage.setItem("jwt", json.jwt);
+          this.$router.push({ name: "Login" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
+  },
+};
+</script>
 
 
 <style scoped>
