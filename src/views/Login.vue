@@ -2,7 +2,8 @@
   <div class="form-bg">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col">
+          <!-- <div class="col-md-3 col-md-offset-4"> -->
           <div class="form-container">
             <img
               id="profile-img"
@@ -42,6 +43,7 @@
                 </router-link>
               </p>
             </form>
+            <!-- </div> -->
           </div>
         </div>
         <div class="col-md-4">
@@ -57,6 +59,19 @@
   </div>
 </template>
 <script>
+export default {
+  data() {
+    return {
+      users: [],
+    };
+  },
+  mounted() {
+    fetch("https://american-sterns.herokuapp.com/users")
+      .then((res) => res.json())
+      .then((data) => (this.users = data))
+      .catch((err) => console.log(err.message));
+  },
+};
 </script>
 
 

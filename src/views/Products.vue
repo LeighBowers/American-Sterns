@@ -8,11 +8,7 @@
       >
         ADD NEW
       </button>
-      <!-- <div class="nav-item">
-        <a class="nav-link" aria-current="page" href="index.html"
-          ><span style="color: black">Home</span>
-        </a>
-      </div> -->
+
       <div class="nav-item">
         <a class="nav-link" aria-current="page" href="cart"
           ><span id="badge" style="color: white"></span
@@ -21,7 +17,7 @@
       </div>
     </div>
   </nav>
-  <div class="container">
+  <!-- <div class="container">
     <div>
       <label for="catergorySort" class="form-label"> Sort by catergory:</label>
       <select
@@ -107,28 +103,33 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div
-        v-for="product in products"
-        :key="product.id"
-        class="card"
-        style="width: 18rem"
-      >
-        <img :src="product.img" class="card-img-top" alt="" />
-        <div class="card-body">
-          <h5>{{ product.name }}</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <div class="content">
-            <div class="buttons">
-              <button class="btn btn-dark">EDIT</button>
-              <button class="btn btn-danger">DELETE</button>
-              <button class="btn btn-danger">ADD TO CART</button>
-            </div>
+  </div> -->
+  <!-- Topic Cards -->
+  <div id="cards_landscape_wrap-2">
+    <div class="container">
+      <div class="row">
+        <div v-for="product in products" :key="product.id">
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <a href="">
+              <div class="card-flyer">
+                <div class="text-box">
+                  <div class="image-box">
+                    <img :src="product.img" alt="" />
+                  </div>
+                  <div class="text-container">
+                    <h5>{{ product.name }}</h5>
+                    <p>{{ product.description }}</p>
+                  </div>
+                  <div class="card-footer">
+                    <div class="buttons">
+                      <button class="btn btn-dark">EDIT</button>
+                      <button class="btn btn-danger">DELETE</button>
+                      <button class="btn btn-danger">ADD TO CART</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -144,7 +145,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:3000")
+    fetch("https://american-sterns.herokuapp.com/products")
       .then((res) => res.json())
       .then((data) => (this.products = data))
       .catch((err) => console.log(err.message));
@@ -170,32 +171,86 @@ export default {
   flex-wrap: wrap;
 }
 
-img {
+#cards_landscape_wrap-2 {
+  text-align: center;
+  background: #f7f7f7;
+}
+#cards_landscape_wrap-2 .container {
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+#cards_landscape_wrap-2 a {
+  text-decoration: none;
+  outline: none;
+}
+#cards_landscape_wrap-2 .card-flyer {
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box {
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box img {
+  -webkit-transition: all 0.9s ease;
+  -moz-transition: all 0.9s ease;
+  -o-transition: all 0.9s ease;
+  -ms-transition: all 0.9s ease;
+  width: 100%;
   height: 200px;
-  width: 200px;
-  object-fit: cover;
 }
-
-.in {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 7px;
-  width: 400px;
+#cards_landscape_wrap-2 .card-flyer:hover .image-box img {
+  opacity: 0.7;
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  -o-transform: scale(1.15);
+  transform: scale(1.15);
 }
-
-.modal-body {
-  margin-top: auto;
-  margin-bottom: 10px;
+#cards_landscape_wrap-2 .card-flyer .text-box {
+  text-align: center;
 }
-
-.fs-6 {
-  padding-left: 10px;
+#cards_landscape_wrap-2 .card-flyer .text-box .text-container {
+  padding: 30px 18px;
 }
-
-.modal-title {
-  margin-left: auto;
+#cards_landscape_wrap-2 .card-flyer {
+  background: #ffffff;
+  margin-top: 50px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.4);
+}
+#cards_landscape_wrap-2 .card-flyer:hover {
+  background: #fff;
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.5);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-top: 50px;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box p {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #000000;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box h6 {
+  margin-top: 0px;
+  margin-bottom: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: "Roboto Black", sans-serif;
+  letter-spacing: 1px;
+  color: #00acc1;
 }
 
 .inp {
