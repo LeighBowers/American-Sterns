@@ -35,7 +35,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://american-sterns.herokuapp.com/users")
+    fetch("https://american-sterns.herokuapp.com/cart")
       .then((res) => res.json())
       .then((data) => (this.cart = data))
       .catch((err) => console.log(err.message));

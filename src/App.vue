@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-sticky">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">American Sterns</a>
       <button
