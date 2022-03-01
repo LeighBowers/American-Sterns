@@ -13,40 +13,44 @@
             <h3 class="title">Register</h3>
 
             <form @submit.prevent="login" class="form-horizontal">
-              <div class="form-group">
-                <label>name</label>
-                <input
-                  class="form-control"
-                  type="name"
-                  v-model="name"
-                  placeholder="name"
-                />
-              </div>
-              <div class="form-group">
-                <label>email</label>
-                <input
-                  class="form-control"
-                  type="email"
-                  v-model="email"
-                  placeholder="email address"
-                />
-              </div>
+              <div v-if="!successful">
+                <div class="form-group">
+                  <label>name</label>
+                  <input
+                    class="form-control"
+                    type="name"
+                    v-model="name"
+                    placeholder="name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>email</label>
+                  <input
+                    class="form-control"
+                    type="email"
+                    v-model="email"
+                    placeholder="email address"
+                  />
+                </div>
 
-              <div class="form-group">
-                <label>password</label>
-                <input
-                  class="form-control"
-                  type="password"
-                  v-model="password"
-                  placeholder="password"
-                />
+                <div class="form-group">
+                  <label>password</label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    v-model="password"
+                    placeholder="password"
+                  />
+                </div>
+                <router-link :to="{ name: 'Login' }">
+                  <button type="button" class="btn btn-default">
+                    Register
+                  </button>
+                </router-link>
+                <p>
+                  <router-link :to="{ name: 'Login' }"> </router-link>
+                </p>
               </div>
-              <router-link :to="{ name: 'Login' }">
-                <button type="button" class="btn btn-default">Login</button>
-              </router-link>
-              <p>
-                <router-link :to="{ name: 'Login' }"> </router-link>
-              </p>
             </form>
           </div>
         </div>
