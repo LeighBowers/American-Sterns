@@ -20,6 +20,7 @@
           <router-link to="/register" class="nav-link">Register</router-link>
           <router-link to="/products" class="nav-link">Products</router-link>
           <router-link to="/cart" class="nav-link">Cart</router-link>
+          <router-link to="/profile" class="nav-link">Profile</router-link>
         </div>
       </div>
     </div>

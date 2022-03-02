@@ -4,11 +4,14 @@
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
           <div class="form-container">
-            <img
+            <div class="profile-img">
+                 <img
               id="profile-img"
               src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
               class="profile-img-card"
             />
+            </div>
+           
 
             <h3 class="title">Register</h3>
 
@@ -42,7 +45,7 @@
                 />
               </div>
               <router-link :to="{ name: 'Login' }">
-                <button type="button" class="btn btn-default">Register</button>
+                <button type="button" class="btn btn-default" @submit="prevent">Register</button>
               </router-link>
               <!-- <p>
                 <router-link :to="{ name: 'Login' }"> </router-link>
@@ -92,6 +95,12 @@ export default {
 
 
 <style scoped>
+.form-bg{
+    display: center;
+}
+.profile-img {
+  padding-left: 75px;
+}
 .demo {
   background: #f2f2f2;
 }

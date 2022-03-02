@@ -5,11 +5,14 @@
         <div class="col">
           <!-- <div class="col-md-3 col-md-offset-4"> -->
           <div class="form-container">
-            <img
+            <div class="profile-img">
+               <img
               id="profile-img"
               src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
               class="profile-img-card"
             />
+            </div>
+           
 
             <h3 class="title">Login</h3>
 
@@ -59,34 +62,56 @@
   </div>
 </template>
 <script>
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+
 export default {
+  name: "Login",
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
   data() {
+    const schema = yup.object().shape({
+    fullname: yup.string().required("username is required"),
+    password: yup.string().required("Password is required")
+    });
     return {
-      email: "",
-      password: "",
+      loading: false,
+      message: "",
+      schema,
+    
+     
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+   created() {
+    if (this.loggedIn) {
+      this.$router.push("/Profile");
+    }
+  },
   methods: {
-    register() {
-      fetch("https://american-sterns.herokuapp.com/users", {
-        method: "POST",
-        body: JSON.stringify({
-          email: this.email,
-          password: this.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
+    handleLogin(user) {
+      this.loading = true;
+      this.$store.dispatch("auth/login", user).then(
+        () => {
+          this.$router.push("/Profile");
         },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          localStorage.setItem("jwt", json.jwt);
-          alert("User Login");
-          this.$router.push({ name: "Products" });
-        })
-        .catch((err) => {
-          alert(err);
-        });
+        (error) => {
+          this.loading = false;
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+        }
+      );
     },
   },
 };
@@ -94,6 +119,9 @@ export default {
 
 
 <style scoped>
+.profile-img{
+  padding-left: 290px;
+}
 .demo {
   background: #f2f2f2;
 }
