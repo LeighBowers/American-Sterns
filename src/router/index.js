@@ -52,17 +52,24 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+<<<<<<< HEAD
+// router.beforeEach((to,from,next) => {
+//   const publicPages = ["/home","/login","/register"];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem("user");
+=======
 router.beforeEach((to,from,next) => {
   const publicPages = ["/login","/register","/home"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
+>>>>>>> 8d14d78aff23e947c0ffdf23e53f5b614bad8ddd
 
-  if (authRequired && !loggedIn) {
-    next("/login");
-  }else {
-    next();
-  }
-});
+//   if (authRequired && !loggedIn) {
+//     next("/login");
+//   }else {
+//     next();
+//   }
+// });
 
 export default router;
 
