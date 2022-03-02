@@ -1,11 +1,11 @@
 // imports 
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "@/views/Login.vue";
-import Register from "@/views/Register.vue";
-import Products from "@/views/Products.vue";
-import Cart from "@/views/Cart.vue";
-import Profile from "@/views/Profile.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import Products from "../views/Products.vue";
+import Cart from "../views/Cart.vue";
+import Profile from "../views/Profile.vue"
 
 
 
@@ -52,10 +52,17 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+<<<<<<< HEAD
 // router.beforeEach((to,from,next) => {
 //   const publicPages = ["/home","/login","/register"];
 //   const authRequired = !publicPages.includes(to.path);
 //   const loggedIn = localStorage.getItem("user");
+=======
+router.beforeEach((to,from,next) => {
+  const publicPages = ["/login","/register","/home"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
+>>>>>>> 8d14d78aff23e947c0ffdf23e53f5b614bad8ddd
 
 //   if (authRequired && !loggedIn) {
 //     next("/login");
