@@ -10,9 +10,9 @@
       </button>
 
       <div class="nav-item">
-        <a class="nav-link" aria-current="page" href="cart"
+        <router-link class="nav-link" aria-current="page" to="cart"
           ><span id="badge" style="color: white"></span
-          ><span style="color: black">Cart</span></a
+          ><span style="color: black"> Cart</span></router-link
         >
       </div>
     </div>
@@ -122,7 +122,7 @@
             <div class="buttons">
               <button class="btn btn-dark">EDIT</button>
               <button class="btn btn-danger">DELETE</button>
-              <button class="btn btn-danger">ADD TO CART</button>
+              <button v-on:click="addItemToCart(products)">ADD TO CART</button>
             </div>
           </div>
         </div>
@@ -136,6 +136,7 @@ export default {
   data() {
     return {
       products: [],
+      cart: [],
     };
   },
   mounted() {
@@ -143,6 +144,12 @@ export default {
       .then((res) => res.json())
       .then((data) => (this.products = data))
       .catch((err) => console.log(err.message));
+  },
+  methods: {
+    addItemToCart(products) {
+      this.cart.push(products);
+      console.log(this.cart);
+    },
   },
 };
 </script>
