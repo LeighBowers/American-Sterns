@@ -1,11 +1,11 @@
 // imports 
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "@/views/Login.vue";
-import Register from "@/views/Register.vue";
-import Products from "@/views/Products.vue";
-import Cart from "@/views/Cart.vue";
-import Profile from "@/views/Profile.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import Products from "../views/Products.vue";
+import Cart from "../views/Cart.vue";
+import Profile from "../views/Profile.vue"
 
 
 
@@ -53,7 +53,7 @@ const router = createRouter({
   routes,
 });
 router.beforeEach((to,from,next) => {
-  const publicPages = ["/home","/login","/register"];
+  const publicPages = ["/login","/register","/home"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
 

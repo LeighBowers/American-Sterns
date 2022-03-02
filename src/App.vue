@@ -21,12 +21,33 @@
           <router-link to="/products" class="nav-link">Products</router-link>
           <router-link to="/cart" class="nav-link">Cart</router-link>
           <router-link to="/profile" class="nav-link">Profile</router-link>
+          <li class="nav-item">
+          <a class="nav-link" @click.prevent="logOut">
+            <font-awesome-icon icon="sign-out-alt" /> LogOut
+          </a>
+        </li>
         </div>
       </div>
     </div>
   </nav>
   <router-view />
 </template>
+
+<script>
+export default {
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/login");
+    },
+  },
+};
+</script>
 
 <style>
 #nav {

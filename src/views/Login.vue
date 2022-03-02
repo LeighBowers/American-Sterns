@@ -16,27 +16,33 @@
 
             <h3 class="title">Login</h3>
 
-            <form @submit.prevent="login" class="form-horizontal">
+            <Form @submit="handleLogin" :validation-schema="schema" class="form-horizontal">
               <div class="form-group">
-                <label>email</label>
-                <input
+                <label for="name">name</label>
+                <Field
                   class="form-control"
-                  type="email"
-                  v-model="email"
+                  type="text"
                   placeholder="email address"
+                  name="name"
                 />
               </div>
 
               <div class="form-group">
-                <label>password</label>
-                <input
+                <label for="password">password</label>
+                <Field
                   class="form-control"
                   type="password"
-                  v-model="password"
                   placeholder="password"
+                  name="password"
                 />
               </div>
-              <button type="button" class="btn btn-default">Login</button>
+              <button type="submit" class="btn btn-default" :disabled="loading">
+                <span
+                  v-show="loading"
+                  class="spinner-border spinner-border-sm"
+                ></span>
+                <span>Login</span>
+              </button>
               <!-- <router-link :to="{ name: 'Products' }">
                 <button type="submit" class="btn btn-default">Login</button>
               </router-link> -->
@@ -44,8 +50,8 @@
               <br />
               <router-link :to="{ name: 'Register' }"> </router-link>
 
-        
-            </form>
+            </Form>
+            
             <!-- </div> -->
           </div>
         </div>
@@ -64,7 +70,6 @@
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-
 export default {
   name: "Login",
   components: {
@@ -74,15 +79,13 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-    fullname: yup.string().required("username is required"),
+    name: yup.string().required("username is required"),
     password: yup.string().required("Password is required")
     });
     return {
       loading: false,
       message: "",
       schema,
-    
-     
     };
   },
   computed: {
@@ -92,7 +95,7 @@ export default {
   },
    created() {
     if (this.loggedIn) {
-      this.$router.push("/Profile");
+      this.$router.push("/profile");
     }
   },
   methods: {
@@ -100,7 +103,7 @@ export default {
       this.loading = true;
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/Profile");
+          this.$router.push("/profile");
         },
         (error) => {
           this.loading = false;
