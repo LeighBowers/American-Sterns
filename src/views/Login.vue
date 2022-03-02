@@ -40,6 +40,8 @@
 
               <br />
               <router-link :to="{ name: 'Register' }"> </router-link>
+
+        
             </form>
             <!-- </div> -->
           </div>

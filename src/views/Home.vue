@@ -3,7 +3,7 @@
     <div class="inner-container">
       <h1>American Sterns</h1>
       <p class="text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus velit
+       The perfect fit for your unique style
       </p>
     </div>
   </div>
