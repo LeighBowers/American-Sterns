@@ -15,9 +15,9 @@
             <div class="col-md-8">
               <div class="card-body">
                 <h5>{{ product.name }}</h5>
-                <p>{{ cart.price }}</p>
+                <p>{{ product.price }}</p>
 
-                <p>{{ cart.qty }} * {{ cart.price }}</p>
+                <p>{{ product.qty }} * {{ cart.price }}</p>
                 <button class="btn btn-danger">REMOVE ITEM</button>
               </div>
             </div>
