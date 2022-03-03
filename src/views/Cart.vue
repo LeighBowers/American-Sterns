@@ -42,6 +42,7 @@ export default {
       .then((data) => (this.cart = data))
       .catch((err) => console.log(err.message));
   },
+
   methods: {
     removeItemFromCart(product) {
       this.$emit("removeItemFromCart", product);
