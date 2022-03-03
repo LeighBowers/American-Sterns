@@ -6,17 +6,20 @@
           <!-- <div class="col-md-3 col-md-offset-4"> -->
           <div class="form-container">
             <div class="profile-img">
-               <img
-              id="profile-img"
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              class="profile-img-card"
-            />
+              <img
+                id="profile-img"
+                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                class="profile-img-card"
+              />
             </div>
-           
 
             <h3 class="title">Login</h3>
 
-            <Form @submit="handleLogin" :validation-schema="schema" class="form-horizontal">
+            <Form
+              @submit="handleLogin"
+              :validation-schema="schema"
+              class="form-horizontal"
+            >
               <div class="form-group">
                 <label for="name">name</label>
                 <Field
@@ -49,13 +52,12 @@
 
               <br />
               <!-- <router-link :to="{ name: 'Register' }"> </router-link> -->
-                 </Form>
-            
-         
+            </Form>
+
             <!-- </div> -->
           </div>
         </div>
-        
+
         <div class="col-md-4">
           <h2>Gift of quality time</h2>
           <img
@@ -63,9 +65,7 @@
             src="https://i.postimg.cc/WbQ4NJhm/hiswatch.jpg"
             class="profile-img-card"
           />
-          
         </div>
-        
       </div>
     </div>
   </div>
@@ -82,8 +82,8 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-    name: yup.string().required("username is required"),
-    password: yup.string().required("Password is required")
+      name: yup.string().required("username is required"),
+      password: yup.string().required("Password is required"),
     });
     return {
       loading: false,
@@ -96,7 +96,7 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     },
   },
-   created() {
+  created() {
     if (!this.loggedIn) {
       this.$router.push("/Profile");
     }
@@ -106,7 +106,7 @@ export default {
       this.loading = true;
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/Profile");
+          this.$router.push("/Products");
         },
         (error) => {
           this.loading = false;
@@ -125,7 +125,7 @@ export default {
 
 
 <style scoped>
-.profile-img{
+.profile-img {
   padding-left: 290px;
 }
 .demo {
