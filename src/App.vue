@@ -15,12 +15,24 @@
       ><br />
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <router-link to="/home" class="nav-item nav-link">Home</router-link>
-          <router-link to="/login" class="nav-item nav-link">Login</router-link>
+          <li>
+          <router-link to="/home" class="nav-link">Home</router-link>
+          </li>
+          <li>
+          <router-link to="/login" class=" nav-link">Login</router-link>
+          </li>
+          <li>
           <router-link to="/register" class="nav-link">Register</router-link>
+          </li>
+          <li>
           <router-link to="/products" class="nav-link">Products</router-link>
+          </li>
+          <li>
           <router-link to="/cart" class="nav-link">Cart</router-link>
+          </li>
+          <li>
           <router-link to="/profile" class="nav-link">Profile</router-link>
+          </li>
           <li class="nav-item">
           <a class="nav-link" @click.prevent="logOut">
             <font-awesome-icon icon="sign-out-alt" /> LogOut

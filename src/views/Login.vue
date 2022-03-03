@@ -48,13 +48,14 @@
               </router-link> -->
 
               <br />
-              <router-link :to="{ name: 'Register' }"> </router-link>
-
-            </Form>
+              <!-- <router-link :to="{ name: 'Register' }"> </router-link> -->
+                 </Form>
             
+         
             <!-- </div> -->
           </div>
         </div>
+        
         <div class="col-md-4">
           <h2>Gift of quality time</h2>
           <img
@@ -62,7 +63,9 @@
             src="https://i.postimg.cc/WbQ4NJhm/hiswatch.jpg"
             class="profile-img-card"
           />
+          
         </div>
+        
       </div>
     </div>
   </div>
@@ -94,8 +97,8 @@ export default {
     },
   },
    created() {
-    if (this.loggedIn) {
-      this.$router.push("/profile");
+    if (!this.loggedIn) {
+      this.$router.push("/Profile");
     }
   },
   methods: {
@@ -103,7 +106,7 @@ export default {
       this.loading = true;
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/profile");
+          this.$router.push("/Profile");
         },
         (error) => {
           this.loading = false;
