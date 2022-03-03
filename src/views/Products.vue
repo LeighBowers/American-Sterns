@@ -1,13 +1,6 @@
 <template>
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <button
-        class="btn btn-outline-secondary"
-        data-bs-toggle="modal"
-        data-bs-target="#addProduct"
-      >
-        ADD NEW
-      </button>
 
       <div class="nav-item">
         <router-link class="nav-link" aria-current="page" to="cart"
@@ -15,6 +8,21 @@
           ><span style="color: black"> Cart</span></router-link
         >
       </div>
+      <div class="sort">
+         <label for="priceSort" class="form-label">SORT BY PRICE:</label>
+         <select name="priceSort" id="priceSort" onchange="priceSort()">
+          <option value="ascending">Ascending</option>
+          <option value="descending">Descending</option>
+        </select>
+       </div>
+
+       <div class="sort">
+        <label for="sortName" class="form-label">SORT BY NAME:</label>
+        <select name="sortName" id="sortName" onchange="sortName()">
+          <option value="ascending">Ascending</option>
+          <option value="descending">Descending</option>
+        </select>
+       </div>
     </div>
   </nav>
   <!-- <div class="container">
@@ -156,6 +164,12 @@ export default {
 </script>
 
 <style scoped>
+.sort{
+  display:inline-block;
+  justify-content:center;
+  padding:10px;
+
+}
 .card {
   height: auto;
   width: auto;
