@@ -23,94 +23,6 @@
         </select>
        </div>
 
-  <!-- <div class="container">
-    <div>
-      <label for="catergorySort" class="form-label"> Sort by catergory:</label>
-      <select
-        name="catergorySort"
-        id="catergorySort"
-        onchange="catergorySort()"
-      >
-        <option value="all">all</option>
-        <option value="Smart watch">Smart watch</option>
-        <option value="Rolex">Rolex</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="priceSort" class="form-label">Sort by price:</label>
-      <select name="priceSort" id="priceSort" onchange="priceSort()">
-        <option value="ascending">ascending</option>
-        <option value="descending">descending</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="sortName" class="form-label">Sort by name:</label>
-      <select name="sortName" id="sortName" onchange="sortName()">
-        <option value="ascending">ascending</option>
-        <option value="descending">descending</option>
-      </select>
-    </div>
-  </div>
-
-  <div
-    class="modal fade"
-    id="addProduct"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">ADD A PRODUCT</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="card">
-            <div class="card-body">
-              <div class="input-group mb-3">
-                <h4 class="fs-6">Name:</h4>
-                <input
-                  type="text"
-                  class="inp"
-                  placeholder="name of item"
-                  id="add"
-                />
-                <h4 class="fs-6">Category:</h4>
-                <select name="catergory" class="inp" id="catergory">
-                  <option value="fruit">Smart Watch</option>
-                  <option value="vegetable">Rolex</option>
-                </select>
-                <h4 class="fs-6">Price:</h4>
-                <input type="text" class="inp" placeholder="price" id="price" />
-                <h4 class="fs-6">Image:</h4>
-                <input
-                  type="text"
-                  class="inp"
-                  placeholder="enter image"
-                  id="img"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <div class="row row-cols-1 row-cols-sm-3">
     <div v-for="product in products" :key="product.id">
       <div class="col">
@@ -127,8 +39,8 @@
               </div>
           <div class="card-footer">
             <div class="buttons">
-              <button class="btn btn-dark">EDIT</button>
-              <button class="btn btn-danger">DELETE</button>
+              <button class="btn btn-mod btn-border btn-large">EDIT</button>
+              <button class="btn btn-mod btn-border btn-large" >DELETE</button>
             </div>
           </div>
         </div>
@@ -165,7 +77,6 @@ export default {
   display:flex;
   justify-content:center;
 }
-
 .sort{
   display:inline-block;
   justify-content:center;
