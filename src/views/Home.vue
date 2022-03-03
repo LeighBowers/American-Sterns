@@ -2,9 +2,7 @@
   <div class="about-section">
     <div class="inner-container">
       <h1>American Sterns</h1>
-      <p class="text">
-       The perfect fit for your unique style !.
-      </p>
+      <p class="text">The perfect fit for your unique style !...</p>
     </div>
   </div>
 </template>
