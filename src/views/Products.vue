@@ -112,6 +112,7 @@
           <img :src="product.img" class="card-img-top" alt="" />
           <div class="card-body">
             <h5>{{ product.name }}</h5>
+              <h6>R{{product.price}}</h6>
             <p>{{ product.description }}</p>
           </div>
           <div>

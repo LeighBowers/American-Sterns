@@ -7,7 +7,7 @@ import Products from "../views/Products.vue";
 import Cart from "../views/Cart.vue";
 import Profile from "../views/Profile.vue"
 
-
+// const Profile = () => import("../components/Profile.vue")
 
 // lazy-loaded --only load when needed 
 
@@ -52,15 +52,14 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
-router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/register", "/home"];
+router.beforeEach((to,from,next) => {
+  const publicPages = ["/login","/register","/home",];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
 
   if (authRequired && !loggedIn) {
     next("/login");
-  } else {
+  }else {
     next();
   }
 });
