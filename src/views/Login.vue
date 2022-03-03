@@ -22,7 +22,7 @@
                 <Field
                   class="form-control"
                   type="text"
-                  placeholder="email address"
+                  placeholder="name"
                   name="name"
                 />
               </div>

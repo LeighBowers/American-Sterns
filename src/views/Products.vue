@@ -1,6 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
+
 
       <div class="nav-item">
         <router-link class="nav-link" aria-current="page" to="cart"
@@ -23,8 +22,7 @@
           <option value="descending">Descending</option>
         </select>
        </div>
-    </div>
-  </nav>
+
   <!-- <div class="container">
     <div>
       <label for="catergorySort" class="form-label"> Sort by catergory:</label>
@@ -123,15 +121,14 @@
               <h6>R{{product.price}}</h6>
             <p>{{ product.description }}</p>
           </div>
-          <div>
-            <label class="form-label">Quantity:</label>
-            <input type="number" min="1" value="1" id="addQty${position}" />
-          </div>
+               <div class="access">
+                  <input type="number" class="form-control" value="1" min="1" v-on:click="addItemToCart(products)" id="addToCart()">
+                  <button class="btn" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
+              </div>
           <div class="card-footer">
             <div class="buttons">
               <button class="btn btn-dark">EDIT</button>
               <button class="btn btn-danger">DELETE</button>
-              <button v-on:click="addItemToCart(products)">ADD TO CART</button>
             </div>
           </div>
         </div>
@@ -164,6 +161,11 @@ export default {
 </script>
 
 <style scoped>
+.access{
+  display:flex;
+  justify-content:center;
+}
+
 .sort{
   display:inline-block;
   justify-content:center;
