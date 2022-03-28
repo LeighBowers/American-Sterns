@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <h1>boom</h1>
     <div class="col-md-3 col-sm-6">
         <div class="product-grid">
         <div v-for="product of content" :key="product._id"> 
@@ -19,6 +20,7 @@
         </div>
     </div>
 </div>
+
 </template>
 
 <script>
