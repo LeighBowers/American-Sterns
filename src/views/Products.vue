@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3 col-sm-6">
         <div class="product-grid">
-        <div v-for="product in products" :key="product.id"> 
+        <div v-for="product of content" :key="product._id"> 
             <div class="product-image">
                 <div class="image">
                     <img :src="product.img" class="card-img-top" alt="" />
@@ -22,88 +22,32 @@
 </template>
 
 <script>
+import UserService  from "../services/user.service"
 export default {
   components: {
   
   },
   data() {
     return {
-      product: null,
-      search: "",
-      isModalVisible: false,
-      isadmin: false,
-      selected: "",
+     content: ""
     };
   },
-  methods: {
-   
-  },
   mounted() {
-    fetch("https://ecomsbackend.herokuapp.com/products/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
+    this.loading = true;
+    UserService.getPublicContent().then(
+      (response) => {
+        this.content = response.data;
+        this.loading = false;
       },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        this.product = json;
-        if (localStorage.getItem("jwt")) {
-          fetch("https://ecomsbackend.herokuapp.com/auth/users/", {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
-          })
-            .then((response) => response.json())
-            .then((json) => {
-              if (json.isadmin == true) {
-                alert("You are admin");
-                this.isadmin = json.isadmin;
-              }
-            })
-            .catch((err) => {
-              alert(err);
-            });
-        }
-      })
-      .catch((err) => {
-        alert(err);
-        console.log(err);
-      });
-  },
-  computed: {
-    filterProducts: function () {
-      let filtered = this.product
-      if (this.selected == '') {
-          filtered = filtered.filter((product) => {
-           return product.category.match(this.selected) ;
-          
-        });
-        if(this.search){
-          filtered = filtered.filter((product) =>{
-            return product.title.match(this.search)
-          })
-        }
-        return filtered
+      (error) => {
+        this.content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) 
+          error.message 
+          error.toString();
       }
-      if (this.selected) {
-        filtered = filtered.filter((product) => {
-           return product.category.match(this.selected) ;
-          
-        });
-        if(this.search){
-          filtered = filtered.filter((product) =>{
-            return product.title.match(this.search)
-          })
-        }
-        return filtered
-        
-      }
-  
-      
-    },
+    );
   },
 };
 </script>

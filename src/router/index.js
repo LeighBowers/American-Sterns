@@ -49,8 +49,19 @@ const routes = [
 
 ];
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/home','/register','/login','/about'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+
+  if (authRequired && !loggedIn) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 
