@@ -1,122 +1,250 @@
 <template>
-
-
-      <div class="nav-item">
-        <router-link class="nav-link" aria-current="page" to="cart"
-          ><span id="badge" style="color: white"></span
-          ><span style="color: black"> Cart</span></router-link
-        >
-      </div>
-      <div class="sort">
-         <label for="priceSort" class="form-label">SORT BY PRICE:</label>
-         <select name="priceSort" id="priceSort" onchange="priceSort()">
-          <option value="ascending">Ascending</option>
-          <option value="descending">Descending</option>
-        </select>
-       </div>
-
-       <div class="sort">
-        <label for="sortName" class="form-label">SORT BY NAME:</label>
-        <select name="sortName" id="sortName" onchange="sortName()">
-          <option value="ascending">Ascending</option>
-          <option value="descending">Descending</option>
-        </select>
-       </div>
-
-  <div class="row row-cols-1 row-cols-sm-3">
-    <div v-for="product in products" :key="product.id">
-      <div class="col">
-        <div class="card">
-          <img :src="product.img" class="card-img-top" alt="" />
-          <div class="card-body">
-            <h5>{{ product.name }}</h5>
-              <h6>R{{product.price}}</h6>
-            <p>{{ product.description }}</p>
-          </div>
-               <div class="access">
-                  <input type="number" class="form-control" value="1" min="1" v-on:click="addItemToCart(products)" id="addToCart()">
-                  <button class="btn" style="font-size: 25px"><i class="fas fa-cart-plus"></i></button>
-              </div>
-          <div class="card-footer">
-            <div class="buttons">
-              <button class="btn btn-mod btn-border btn-large">EDIT</button>
-              <button class="btn btn-mod btn-border btn-large" >DELETE</button>
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="product-grid">
+        <div v-for="product in products" :key="product.id"> 
+            <div class="product-image">
+                <div class="image">
+                    <img :src="product.img" class="card-img-top" alt="" />
+                </div>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="title"><div>{{ product.name }}</div></h3>
+                <h4 class="title"><div>{{ product.description }}</div></h4>
+                <span class="product-category"><div>{{ product.anime }}</div></span>
+                <div class="price">R{{product.price}}</div>
+                <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to cart</a>
+            </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
 export default {
+  components: {
+  
+  },
   data() {
     return {
-      products: [],
-      cart: [],
+      product: null,
+      search: "",
+      isModalVisible: false,
+      isadmin: false,
+      selected: "",
     };
   },
-  mounted() {
-    fetch("https://american-sterns.herokuapp.com/products")
-      .then((res) => res.json())
-      .then((data) => (this.products = data))
-      .catch((err) => console.log(err.message));
-  },
   methods: {
-    addItemToCart(products) {
-      this.cart.push(products);
-      console.log(this.cart);
+   
+  },
+  mounted() {
+    fetch("https://ecomsbackend.herokuapp.com/products/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        this.product = json;
+        if (localStorage.getItem("jwt")) {
+          fetch("https://ecomsbackend.herokuapp.com/auth/users/", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              if (json.isadmin == true) {
+                alert("You are admin");
+                this.isadmin = json.isadmin;
+              }
+            })
+            .catch((err) => {
+              alert(err);
+            });
+        }
+      })
+      .catch((err) => {
+        alert(err);
+        console.log(err);
+      });
+  },
+  computed: {
+    filterProducts: function () {
+      let filtered = this.product
+      if (this.selected == '') {
+          filtered = filtered.filter((product) => {
+           return product.category.match(this.selected) ;
+          
+        });
+        if(this.search){
+          filtered = filtered.filter((product) =>{
+            return product.title.match(this.search)
+          })
+        }
+        return filtered
+      }
+      if (this.selected) {
+        filtered = filtered.filter((product) => {
+           return product.category.match(this.selected) ;
+          
+        });
+        if(this.search){
+          filtered = filtered.filter((product) =>{
+            return product.title.match(this.search)
+          })
+        }
+        return filtered
+        
+      }
+  
+      
     },
   },
 };
 </script>
 
-<style scoped>
-.access{
-  display:flex;
-  justify-content:center;
+<style scoped >
+.row {
+    padding: 80px;
 }
-.sort{
-  display:inline-block;
-  justify-content:center;
-  padding:10px;
+.product-grid{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    border: 3px dashed #f2f2f2;
+    border-radius: 5px;
+    transition: all .4s ease-in-out;
+}
+.product-grid:hover{ border-color: #c6202e; }
+.product-grid .product-image{ position: relative; }
+.product-grid .product-image a.image{ display: block; }
+.product-grid .product-image img{
+    width: 100%;
+    height: auto;
+}
+.product-grid .product-links{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    z-index: 1;
+    transition: all .4s ease;
+}
+.product-grid:hover .product-links{
+    opacity: 1;
+    top: 50%;
+}
+.product-grid .product-links li{
+    display: inline-block;
+    margin: 0 2px;
+    transition: all 0.5s ease-in-out;
+}
+.product-grid .product-links li a{
+    color: #c6202e;
+    background: #fff;
+    font-size: 16px;
+    line-height: 52px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+.product-grid .product-links li a:hover{
+    color: #fff;
+    background: #c6202e;
+}
+.product-grid .product-links li a:before,
+.product-grid .product-links li a:after{
+    content: attr(data-tip);
+    color: #fff;
+    background-color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    display: none;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    top: -32px;
+    transition: all 0.3s;
+}
+.product-grid .product-links li a:after{
+    content: '';
+    height: 15px;
+    width: 15px;
+    transform: translateX(-50%) rotate(45deg);
+    top: -24px;
+    z-index: -1;
+}
+.product-grid .product-links li a:hover:before,
+.product-grid .product-links li a:hover:after{
+    display: block;
+}
+.product-grid .product-content{ padding: 20px 12px; }
+.product-grid .title{
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+.product-grid .title a{
+    color: #000;
+    transition: all 0.3s ease 0s;
+}
+.product-grid .product-category{
+    font-size: 13px;
+    text-transform: capitalize;
+    margin: 0 0 10px;
+    display: block;
+}
+.product-grid .product-category a{
+    color: #828282;
+    transition: all 0.3s ease 0s;
+}
+.product-grid .title a:hover,
+.product-grid .product-category a:hover{ color: #c6202e; }
+.product-grid .price{
+    color: #c6202e;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+.product-grid .add-to-cart{
+    color: #c6202e;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 12px;
+    border: 1px solid #E4E4E4;
+    border-radius: 50px;
+    display: block;
+    transition: all 0.3s ease-in-out;
+}
+.product-grid .add-to-cart:hover,
+.product-grid:hover .add-to-cart{
+    color: #fff;
+    background: #89d8f0;
+    border-color: #c6202e;
+}
+@media screen and (max-width: 990px){
+    .product-grid{ margin-bottom: 30px; }
+}
 
-}
-.card {
-  height: auto;
-  width: auto;
-}
 
-img {
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
-}
 
-.modal-body {
-  margin-top: auto;
-  margin-bottom: 10px;
-}
-
-.modal-title {
-  margin-left: auto;
-}
-
-.nav-item {
-  display: flex;
-  justify-content: flex-end;
-  align-content: flex-end;
-}
-
-.nav-link #badge {
-  background-color: red;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  top: 6px;
-  right: 3px;
-  text-align: center;
-}
 </style>
