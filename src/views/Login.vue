@@ -5,13 +5,6 @@
         <div class="col">
           <!-- <div class="col-md-3 col-md-offset-4"> -->
           <div class="form-container">
-            <div class="profile-img">
-              <img
-                id="profile-img"
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                class="profile-img-card"
-              />
-            </div>
 
             <h3 class="title">Login</h3>
 
@@ -125,6 +118,10 @@ export default {
 
 
 <style scoped>
+.form-bg {
+  padding-top: 70px;
+}
+
 .profile-img {
   padding-left: 290px;
 }

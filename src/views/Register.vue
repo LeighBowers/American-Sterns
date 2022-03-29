@@ -1,183 +1,313 @@
 <template>
-  <div class="form-bg">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-          <div class="form-container">
-            <div class="profile-img">
-                 <img
-              id="profile-img"
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              class="profile-img-card"
-            />
+<div class="container">
+	<div class="main">
+		<div class="logo">
+			<h1>#</h1>
+		</div>
+		<Form @submit="handleRegister">
+          <div v-if="!successful">
+            <div class="form-group">
+              <label for="name"></label>
+			  <i class="fa fa-user"></i>
+              <Field
+                name="name"
+                placeholder="Username"
+                class="form-control"
+			  	    type="name"
+				
+              />
+              <ErrorMessage name="fullname" class="error-feedback" />
             </div>
-           
-
-            <h3 class="title">Register</h3>
-
-            <form @submit.prevent="login" class="form-horizontal">
-              <div class="form-group">
-                <label>name</label>
-                <input
-                  class="form-control"
-                  type="name"
-                  v-model="name"
-                  placeholder="name"
-                />
-              </div>
-              <div class="form-group">
-                <label>email</label>
-                <input
-                  class="form-control"
-                  type="email"
-                  v-model="email"
-                  placeholder="email address"
-                />
-              </div>
-
-              <div class="form-group">
-                <label>password</label>
-                <input
-                  class="form-control"
-                  type="password"
-                  v-model="password"
-                  placeholder="password"
-                />
-              </div>
-              <router-link :to="{ name: 'Login' }">
-                <button type="button" class="btn btn-default" @submit="prevent">Register</button>
-              </router-link>
-              <!-- <p>
-                <router-link :to="{ name: 'Login' }"> </router-link>
-              </p> -->
-            </form>
+            <div class="form-group">
+              <label for="email"></label>
+			  <i class="fa fa-lock"></i>
+              <Field
+                name="email"
+                placeholder="email address"
+                class="form-control"
+                type="email"
+              />
+              <ErrorMessage name="email" class="error-feedback" />
+            </div>
+            <div class="form-group">
+              <label for="password"></label>
+			  <i class="fa fa-envelope"></i>
+              <Field
+                name="password"
+                class="form-control"
+                placeholder="Password"
+                type="password"
+              />
+              <ErrorMessage name="password" class="error-feedback" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-" :disabled="loading">
+              <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+              ></span>
+              <span >Register</span>
+            </button>
+            <br />
+            <h4 style="color: black" class="login">
+              Already a member? <a href="/login">Log In</a>
+            </h4>
           </div>
+        </Form>
+        <div
+          v-if="message"
+          class="alert"
+          :class="successful ? 'alert-success' : 'alert-danger'"
+        >
+          {{ message }}
         </div>
       </div>
     </div>
-  </div>
 </template>
+
 <script>
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
 export default {
+  name: "register",
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+  },
   data() {
+    const schema = yup.object().shape({
+      name: yup
+        .string()
+        .required("username is required!")
+        .min(3, "Must be at least 3 characters!")
+        .max(20, "Must be maximum 20 characters!"),
+      email: yup
+        .string()
+        .required("Email is required!")
+        .email("Email is invalid!")
+        .max(50, "Must be maximum 50 characters!"),
+      password: yup
+        .string()
+        .required("Password is required!")
+        .min(6, "Must be at least 6 characters!")
+        .max(40, "Must be maximum 40 characters!"),
+    });
     return {
-      name: "",
-      email: "",
-      password: "",
+      successful: false,
+      loading: false,
+      message: "",
+      schema,
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  mounted() {
+    if (this.loggedIn) {
+      this.$router.push("/");
+    }
+  },
   methods: {
-    register() {
-      fetch("https://american-sterns.herokuapp.com/users", {
-        method: "POST",
-        body: JSON.stringify({
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
+    handleRegister(user) {
+      console.log("Successfully registered");
+      this.message = "";
+      this.successful = false;
+      this.loading = true;
+      this.$store.dispatch("auth/register", user).then(
+        (data) => {
+          console.log(data);
+          this.message = data.message;
+          this.successful = true;
+          this.loading = false;
         },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          alert("User registered");
-          localStorage.setItem("jwt", json.jwt);
-          this.$router.push({ name: "Login" });
-        })
-        .catch((err) => {
-          alert(err);
-        });
+        (error) => {
+          console.log(error.message);
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          this.successful = false;
+          this.loading = false;
+        }
+      );
     },
   },
 };
 </script>
 
-
 <style scoped>
-.form-bg{
-    display: center;
+.container{
+	padding-top:100px ;
 }
-.profile-img {
-  padding-left: 75px;
+.main {
+	width: 390px;
+	height: 650px;
+	background: #fff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 0 20px rgba(137, 207, 240);
+	        box-shadow: 0 0 20px rgba(137, 207, 240);
 }
-.demo {
-  background: #f2f2f2;
+.logo {
+	top: 50px;
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	background: #000;
+	position: relative;
+	border-radius: 100px;
+	-webkit-transition: 200ms ease-in-out;
+	-o-transition: 200ms ease-in-out;
+	transition: 200ms ease-in-out;
+	-webkit-animation: rotation 10s infinite linear;
+	-webkit-box-shadow: 0 0 100px #89d8f0;
+	        box-shadow: 0 0 100px #89d8f0;
+	background: #89d8f0;  
+	background: -webkit-linear-gradient(to right, #1C86EE, #89d8f0);  
+	background: linear-gradient(to right, #1C86EE, #89d8f0); 
+
 }
-.form-container {
-  background: #ecf0f3;
-  font-family: "Nunito", sans-serif;
-  padding: 40px;
-  /* border-radius: 20px; */
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+.logo:hover {
+	-webkit-animation: rotation 0.9s infinite linear;
+	-webkit-box-shadow: 0 0 10px #1C86EE;
+	        box-shadow: 0 0 10px #1C86EE;
 }
-.form-container .form-icon {
-  color: #fa211ab0;
-  font-size: 55px;
-  text-align: center;
-  line-height: 100px;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 15px;
-  /* border-radius: 50px; */
-  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
+.logo h1 {
+	color: #fff;
+	font-size: 70px;
+	font-weight: 200;
+	line-height: 100px;
 }
-.form-container .title {
-  color: #fa211aad;
-  font-size: 25px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-  margin: 0 0 20px;
+form {
+	top: 100px;
+	position: relative;
 }
-.form-container .form-horizontal .form-group {
-  margin: 0 0 25px 0;
+form input {
+	display: block;
+	margin: 10px auto;
 }
-.form-container .form-horizontal .form-group label {
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
+
+form h4 {
+	font-size: 12px;
+	margin-top: 50px;
 }
-.form-container .form-horizontal .form-control {
-  color: #333;
-  background: #ecf0f3;
-  font-size: 15px;
-  height: 50px;
-  padding: 20px;
-  letter-spacing: 1px;
-  border: none;
-  /* border-radius: 50px; */
-  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
-  display: inline-block;
-  transition: all 0.3s ease 0s;
+
+h4 a {
+	color: #89d8f0;
+	font-weight: bold;
+	text-decoration: none;
+	transition: 200ms ease-in-out;
 }
-.form-container .form-horizontal .form-control:focus {
-  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
-  outline: none;
+h4 a:hover {
+	color: #1C86EE;
 }
-.form-container .form-horizontal .form-control::placeholder {
-  color: #808080;
-  font-size: 14px;
+input[type='username'], input[type='password'] , input[type='email']{
+	width: 60%;
+	outline: none;
+	border-top: 0;
+	color: #1C86EE;
+	border-left: 0;
+	border-right: 0;
+	font-size: 14px;
+	padding: 26px;
+	font-weight: 300;
+	border-bottom: 1px solid #89d8f0;
 }
-.form-container .form-horizontal .btn {
-  color: #000;
-  background-color: #fa211abe;
-  font-size: 15px;
-  font-weight: bold;
-  text-transform: uppercase;
-  width: 100%;
-  padding: 12px 15px 11px;
-  /* border-radius: 20px; */
-  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
-  border: none;
-  transition: all 0.5s ease 0s;
+
+
+[type='submit'] {
+	color: #fff;
+	width: 150px;
+	height: 50px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+	margin-top: 50px;
+	border-radius: 4px;
+	transition: 200ms ease-out;
+	-webkit-box-shadow: 0 0 10px #89d8f0;
+	        box-shadow: 0 0 10px #89d8f0;
+	background: #89c8f0; 
+	background: -webkit-linear-gradient(to right, #89e0f0, #1C86EE);  
+	background: linear-gradient(to right, #89e0f0, #1C86EE); 
 }
-.form-container .form-horizontal .btn:hover,
-.form-container .form-horizontal .btn:focus {
-  color: #fff;
-  letter-spacing: 3px;
-  box-shadow: none;
-  outline: none;
+[type='submit']:hover {
+	width: 155px;
+	height: 52px;
+	transform: scale(1.1);
+	box-shadow: 0 0 40px #89d8f0;
 }
+.fa-envelope {
+	color: #89d8f0;
+  position: absolute;
+  top: 195px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+}
+.fa-user {
+	color: #89d8f0;
+  position: absolute;
+  top: 25px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+}
+
+.fa-lock {
+	color: #89d8f0;
+  position: absolute;
+  top: 105px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+}
+/* .fa-redo {
+	color: #89d8f0;
+  position: absolute;
+  top: 185px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+} */
+
+
+[placeholder]::-webkit-input-placeholder  {
+	color: #89d8f0;
+	padding-left: 10px;
+}
+[placeholder]:focus::-webkit-input-placeholder {
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -webkit-transform: translate(10px, 0);
+          transform: translate(10px, 0);
+  opacity: 0;
+}
+ 
+
+
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+
 </style>

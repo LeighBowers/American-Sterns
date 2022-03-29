@@ -14,35 +14,35 @@ import Profile from "../views/Profile.vue"
 const routes = [
   {
     path: "/cart",
+    name: "Cart",
     component: Cart,
-    name: "Cart"
   },
   {
 
-    path: "/home",
+    path: "/",
+    name: "home",
     component: Home,
-    name: "home"
   },
   {
     path: "/login",
+    name: "Login",
     component: Login,
-    name: "Login"
   },
   {
     path: "/register",
+    name: "Register",
     component: Register,
-    name: "Register"
   },
   {
     path: "/products",
-    component: Products,
     name: "Products",
+    component: Products,
 
   },
   {
     path: "/profile",
-    component: Profile,
     name: "Profile",
+    component: Profile,
 
   }
 
@@ -52,8 +52,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/home','/register','/login','/about'];
+  const publicPages = ['/','/register','/login'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
 

@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <h1>boom</h1>
-    <div class="col-md-3 col-sm-6">
+    <h1>Products</h1>
+    <div class="col-md-3 col-sm-6"  v-for="product of content" :key="product._id">
         <div class="product-grid">
-        <div v-for="product of content" :key="product._id"> 
+     
             <div class="product-image">
                 <div class="image">
                     <img :src="product.img" class="card-img-top" alt="" />
@@ -12,11 +12,10 @@
             <div class="product-content">
                 <h3 class="title"><div>{{ product.name }}</div></h3>
                 <h4 class="title"><div>{{ product.description }}</div></h4>
-                <span class="product-category"><div>{{ product.anime }}</div></span>
                 <div class="price">R{{product.price}}</div>
                 <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to cart</a>
             </div>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -56,16 +55,16 @@ export default {
 
 <style scoped >
 .row {
-    padding: 80px;
+    padding:60px;
 }
 .product-grid{
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    border: 3px dashed #f2f2f2;
+    border: 3px solid #f2f2f2;
     border-radius: 5px;
     transition: all .4s ease-in-out;
 }
-.product-grid:hover{ border-color: #c6202e; }
+.product-grid:hover{ border-color:  #89d8f0; }
 .product-grid .product-image{ position: relative; }
 .product-grid .product-image a.image{ display: block; }
 .product-grid .product-image img{
@@ -152,10 +151,10 @@ export default {
     transition: all 0.3s ease 0s;
 }
 .product-grid .product-category{
-    font-size: 13px;
     text-transform: capitalize;
     margin: 0 0 10px;
     display: block;
+    color: black;
 }
 .product-grid .product-category a{
     color: #828282;
@@ -164,7 +163,7 @@ export default {
 .product-grid .title a:hover,
 .product-grid .product-category a:hover{ color: #c6202e; }
 .product-grid .price{
-    color: #c6202e;
+    color: black;
     font-size: 18px;
     font-weight: 700;
     margin: 0 0 10px;
@@ -183,14 +182,11 @@ export default {
 }
 .product-grid .add-to-cart:hover,
 .product-grid:hover .add-to-cart{
-    color: #fff;
-    background: #89d8f0;
+    color: #89d8f0;
+    background: black;
     border-color: #c6202e;
 }
 @media screen and (max-width: 990px){
     .product-grid{ margin-bottom: 30px; }
 }
-
-
-
 </style>
