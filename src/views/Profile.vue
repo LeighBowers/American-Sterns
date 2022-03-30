@@ -6,19 +6,17 @@
           src="https://i.postimg.cc/7P3VGkHc/icons8-business-man-64.png"
           alt="profilna"
         />
-        <h2>{{ currentUser.username }}</h2>
+        <h2>{{ currentUser.name }}</h2>
        </div>
       <div class="followers">
         <p>
           <strong>Token:</strong>
           {{ currentUser.accessToken.substring(0, 20) }} ...
-          {{
-            currentUser.accessToken.substr(currentUser.accessToken.length - 20)
-          }}
+          {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
         </p>
         <p>
-          <strong>Id:</strong>
-          {{ currentUser.id }}
+          <strong>User ID:</strong>
+          {{ currentUser._id }}
         </p>
         <p>
           <strong>Email:</strong>
@@ -26,12 +24,10 @@
         </p>
       </div>
       <div class="button-follow"></div>
-      <div class="auth">
-        <strong>Authorities:</strong>
+
+        <strong>Your Profile:</strong>
         
-          <p v-for="role in currentUser.roles" :key="role">{{ role }}</p>
-       
-      </div>
+
     </div>
   </div>
 </template>
@@ -51,6 +47,9 @@ export default {
 };
 </script>
 <style scoped>
+p {
+  font-size: 13px;
+}
 .containerers {
   padding-top: 100px;
   padding-bottom: 100px;

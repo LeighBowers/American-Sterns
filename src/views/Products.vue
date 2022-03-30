@@ -9,12 +9,8 @@
             class="form-select"
             aria-label="Default select example">
             <option selected value="">Display All</option>
-            <option value="Naruto">Naruto</option>
-            <option value="Attack On Tittan">Attack On Tittan</option>
-            <option value="Jujutsu Kaisen">Jujutsu Kaisen</option>
-            <option value="Dragon Ball">Dragon Ball</option>
-            <option value="Demon Slayer">Demon Slayer</option>
-            <option value="One Piece">One Piece</option>
+            <option value="womens">womens</option>
+            <option value="Mens">Mens</option>
           </select>
         </div>
                 <div class="col-4">
@@ -40,8 +36,8 @@
                 </div>
             </div>
             <div class="product-content">
-                <h3 class="title"><div>{{ product.name }}</div></h3>
-                <h4 class="title"><div>{{ product.description }}</div></h4>
+                <h1 class="title"><div>{{ product.name }}</div></h1>
+                <h1 class="desc"><div>{{ product.description }}</div></h1>
                 <div class="price">R{{product.price}}</div>
                 <a href="#" class="add-to-cart"><i class="fas fa-cart-plus"></i> Add to cart</a>
             </div>
@@ -124,7 +120,7 @@ export default {
     border-radius: 5px;
     transition: all .4s ease-in-out;
 }
-.product-grid:hover{ border-color:  #89d8f0; }
+.product-grid:hover{ border-color:  #ff0000 }
 .product-grid .product-image{ position: relative; }
 .product-grid .product-image a.image{ display: block; }
 .product-grid .product-image img{
@@ -201,11 +197,19 @@ export default {
 }
 .product-grid .product-content{ padding: 20px 12px; }
 .product-grid .title{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
     margin: 0 0 10px;
 }
+
+.desc{
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+
 .product-grid .title a{
     color: #000;
     transition: all 0.3s ease 0s;
@@ -242,7 +246,7 @@ export default {
 }
 .product-grid .add-to-cart:hover,
 .product-grid:hover .add-to-cart{
-    color: #89d8f0;
+    color: #fff;
     background: black;
     border-color: #c6202e;
 }
