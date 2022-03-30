@@ -182,11 +182,9 @@ export default {
 	-webkit-box-shadow: 0 0 10px 	#ff0000;
 	        box-shadow: 0 0 10px 	#ff0000;
 }
-.logo h1 {
-	color: #fff;
-	font-size: 70px;
-	font-weight: 200;
-	line-height: 100px;
+.logo img {
+  weight: 200px;
+	height: 100px;
 }
 form {
 	top: 100px;
@@ -276,16 +274,6 @@ input[type='name'], input[type='password'] , input[type='email']{
   cursor: text;
   transition: .2s ease-out;
 }
-/* .fa-redo {
-	color: #89d8f0;
-  position: absolute;
-  top: 185px;
-  left: 56px;
-  font-size: 18px !important;
-  cursor: text;
-  transition: .2s ease-out;
-} */
-
 
 [placeholder]::-webkit-input-placeholder  {
 	color: #db2e2eb6;

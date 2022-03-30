@@ -146,11 +146,9 @@ export default {
 	-webkit-box-shadow: 0 0 10px #ff0000;
 	        box-shadow: 0 0 10px #ff0000;
 }
-.logo h1 {
-	color: #fff;
-	font-size: 70px;
-	font-weight: 200;
-	line-height: 100px;
+.logo img{
+	weight: 200px;
+	height: 100px;
 }
 Form {
 	top: 100px;
