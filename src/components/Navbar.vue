@@ -68,7 +68,7 @@ scroll-behavior: smooth;
 }
 
 body {
-background:#ffffff;
+background:#000000;
 /* padding-left: 10rem;
 padding-right: 10rem */
 }
@@ -95,7 +95,7 @@ padding-right: 10rem */
   background-color: rgba(196, 31, 20, 0.822);
 }
 .nav-container svg {
-  color: #fff;
+  color: rgb(0, 0, 0);
   margin-left: 1rem;
 }
 
@@ -130,7 +130,7 @@ padding-right: 10rem */
 
   margin: 0 auto 5px;
 
-  background-color: var(--main-color);
+  background:black;
 
   transition: 0.5s ease-in-out;
 }
@@ -180,7 +180,6 @@ nav a:hover {
   flex-direction: column;
   top: 0;
   right: -100%;
-
   background-color: rgba(0, 0, 0, 85%);
   width: 50%;
   height: 100%;
