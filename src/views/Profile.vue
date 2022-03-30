@@ -3,7 +3,7 @@
     <div class="card">
        <div class="img-name">
         <img
-          src="https://i.postimg.cc/VN51NPys/man-svgrepo-com-1.png"
+          src="https://i.postimg.cc/7P3VGkHc/icons8-business-man-64.png"
           alt="profilna"
         />
         <h2>{{ currentUser.username }}</h2>
@@ -61,18 +61,18 @@ export default {
   border-radius: 16px;
   margin-left: auto;
   margin-right: auto;
-  border: 3px solid #89d8f0;
-  background: #1C86EE;
+  border: 3px solid #ff0000;
+  background: #db2e2eb6;
   color: rgb(255, 255, 255);
-  -webkit-box-shadow: 0 0 50px #89d8f0;
-	        box-shadow: 0 0 50px #89d8f0;
+  -webkit-box-shadow: 0 0 50px #ff0000;
+	        box-shadow: 0 0 50px #ff0000;
 }
 .img-name {
   width: 100%;
   height: 210px;
   margin-left: auto;
   margin-right: auto;
-  border-bottom: 5px solid #89d8f0;
+  border-bottom: 5px solid #ff0000;
   padding-top: 10px;
 }
 .img-name img {
@@ -82,7 +82,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   border-radius: 70px;
-  border: 5px solid #89d8f0;
+  border: 5px solid #ff0000;
   background-color: rgb(234, 241, 247);
 }
 .auth {

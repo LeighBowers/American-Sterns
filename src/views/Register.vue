@@ -2,7 +2,10 @@
 <div class="container">
 	<div class="main">
 		<div class="logo">
-			<h1>#</h1>
+			<img
+          src="https://i.postimg.cc/PqLmyGmm/icons8-watch-64.png"
+          alt=""
+        />
 		</div>
 		<Form @submit="handleRegister">
           <div v-if="!successful">
@@ -13,7 +16,7 @@
                 name="name"
                 placeholder="Username"
                 class="form-control"
-			  	    type="name"
+			  	      type="name"
 				
               />
               <ErrorMessage name="fullname" class="error-feedback" />
@@ -152,8 +155,8 @@ export default {
     margin-right: auto;
     width: 40%;
 	border-radius: 10px;
-	-webkit-box-shadow: 0 0 20px rgba(137, 207, 240);
-	        box-shadow: 0 0 20px rgba(137, 207, 240);
+	-webkit-box-shadow: 0 0 20px rgb(255, 72, 72);
+	        box-shadow: 0 0 20px rgb(255, 72, 72);
 }
 .logo {
 	top: 50px;
@@ -167,17 +170,17 @@ export default {
 	-o-transition: 200ms ease-in-out;
 	transition: 200ms ease-in-out;
 	-webkit-animation: rotation 10s infinite linear;
-	-webkit-box-shadow: 0 0 100px #89d8f0;
-	        box-shadow: 0 0 100px #89d8f0;
-	background: #89d8f0;  
-	background: -webkit-linear-gradient(to right, #1C86EE, #89d8f0);  
-	background: linear-gradient(to right, #1C86EE, #89d8f0); 
+	-webkit-box-shadow: 0 0 100px #db2e2eb6;
+	        box-shadow: 0 0 100px #db2e2eb6;
+	background: #db2e2eb6;  
+	background: -webkit-linear-gradient(to right, 	#ff0000, #db2e2eb6);  
+	background: linear-gradient(to right, 	#ff0000, #db2e2eb6); 
 
 }
 .logo:hover {
 	-webkit-animation: rotation 0.9s infinite linear;
-	-webkit-box-shadow: 0 0 10px #1C86EE;
-	        box-shadow: 0 0 10px #1C86EE;
+	-webkit-box-shadow: 0 0 10px 	#ff0000;
+	        box-shadow: 0 0 10px 	#ff0000;
 }
 .logo h1 {
 	color: #fff;
@@ -200,25 +203,25 @@ form h4 {
 }
 
 h4 a {
-	color: #89d8f0;
+	color: #db2e2eb6;
 	font-weight: bold;
 	text-decoration: none;
 	transition: 200ms ease-in-out;
 }
 h4 a:hover {
-	color: #1C86EE;
+	color: #ff0000;
 }
-input[type='username'], input[type='password'] , input[type='email']{
+input[type='name'], input[type='password'] , input[type='email']{
 	width: 60%;
 	outline: none;
 	border-top: 0;
-	color: #1C86EE;
+	color: #ff0000;
 	border-left: 0;
 	border-right: 0;
 	font-size: 14px;
 	padding: 26px;
 	font-weight: 300;
-	border-bottom: 1px solid #89d8f0;
+	border-bottom: 1px solid #db2e2eb6;
 }
 
 
@@ -233,20 +236,20 @@ input[type='username'], input[type='password'] , input[type='email']{
 	margin-top: 50px;
 	border-radius: 4px;
 	transition: 200ms ease-out;
-	-webkit-box-shadow: 0 0 10px #89d8f0;
-	        box-shadow: 0 0 10px #89d8f0;
-	background: #89c8f0; 
-	background: -webkit-linear-gradient(to right, #89e0f0, #1C86EE);  
-	background: linear-gradient(to right, #89e0f0, #1C86EE); 
+	-webkit-box-shadow: 0 0 10px #db2e2eb6;
+	        box-shadow: 0 0 10px #db2e2eb6;
+	background: #db2e2eb6; 
+	background: -webkit-linear-gradient(to right, #db2e2eb6, #ff0000);  
+	background: linear-gradient(to right, #db2e2eb6, #ff0000); 
 }
 [type='submit']:hover {
 	width: 155px;
 	height: 52px;
 	transform: scale(1.1);
-	box-shadow: 0 0 40px #89d8f0;
+	box-shadow: 0 0 40px #db2e2eb6;
 }
 .fa-envelope {
-	color: #89d8f0;
+	color: #ff0000;
   position: absolute;
   top: 195px;
   left: 56px;
@@ -255,7 +258,7 @@ input[type='username'], input[type='password'] , input[type='email']{
   transition: .2s ease-out;
 }
 .fa-user {
-	color: #89d8f0;
+	color: #ff0000;
   position: absolute;
   top: 25px;
   left: 56px;
@@ -265,7 +268,7 @@ input[type='username'], input[type='password'] , input[type='email']{
 }
 
 .fa-lock {
-	color: #89d8f0;
+	color: #ff0000;
   position: absolute;
   top: 105px;
   left: 56px;
@@ -285,7 +288,7 @@ input[type='username'], input[type='password'] , input[type='email']{
 
 
 [placeholder]::-webkit-input-placeholder  {
-	color: #89d8f0;
+	color: #db2e2eb6;
 	padding-left: 10px;
 }
 [placeholder]:focus::-webkit-input-placeholder {

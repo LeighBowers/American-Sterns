@@ -22,7 +22,7 @@
   </div>
   <div class="mobile-nav">
     <nav class="m-nav">
-        <li><router-link class="mobile" to="/home">Home</router-link></li>
+        <li><router-link class="mobile" to="/">Home</router-link></li>
       <li><router-link class="mobile" to="/login">Login</router-link></li>
       <li><router-link class="mobile" to="/register">Register</router-link></li>
       <li><router-link class="mobile" to="/products">Porducts</router-link></li>
@@ -155,7 +155,7 @@ padding-right: 10rem */
 }
 .scroll {
   background-color: #a1572f;
-  color: #eef;
+  color: rgb(255, 0, 0);
 }
 
 .nav a {

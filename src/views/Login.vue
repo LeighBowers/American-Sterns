@@ -1,71 +1,60 @@
 <template>
-  <div class="form-bg">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <!-- <div class="col-md-3 col-md-offset-4"> -->
-          <div class="form-container">
+<div class="container">
+	<div class="main">
+		<div class="logo">
+				<img
+          src="https://i.postimg.cc/PqLmyGmm/icons8-watch-64.png"
+          alt=""
+        />
+		</div>
+		<!-- Login Form -->
+		<Form @submit="handleLogin" :validation-schema="schema">
+ 
+        <div class="form-group">
+                    <label class="form-label" id="nameLabel" for="name"></label>
+                    <Field 
+                      name="name"
+                      type="text" 
+                      class="form-control"
+                      placeholder="Username" 
+                    /> 
+                    <i class="fa fa-user"></i>
+                    <ErrorMessage name="yourname" class="error-feedback" />
+                    
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="subjectLabel" for="sublect"></label>
+                    <Field name="password" type="password" class="form-control" placeholder="Password" /> <i class="fa fa-lock"></i>
+                    <ErrorMessage name="password" class="error-feedback"/>
+                </div>
+                <div class="form-group">
+                <div class=" b text-center margin-top-25">
+                    <button type="submit" class="btn btn-mod btn-border btn-large" :disabled="loading">
+                      LOGIN
+                    </button>
 
-            <h3 class="title">Login</h3>
-
-            <Form
-              @submit="handleLogin"
-              :validation-schema="schema"
-              class="form-horizontal"
-            >
-              <div class="form-group">
-                <label for="name">name</label>
-                <Field
-                  class="form-control"
-                  type="text"
-                  placeholder="name"
-                  name="name"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="password">password</label>
-                <Field
-                  class="form-control"
-                  type="password"
-                  placeholder="password"
-                  name="password"
-                />
-              </div>
-              <button type="submit" class="btn btn-default" :disabled="loading">
-                <span
-                  v-show="loading"
-                  class="spinner-border spinner-border-sm"
-                ></span>
-                <span>Login</span>
-              </button>
-              <!-- <router-link :to="{ name: 'Products' }">
-                <button type="submit" class="btn btn-default">Login</button>
-              </router-link> -->
-
-              <br />
-              <!-- <router-link :to="{ name: 'Register' }"> </router-link> -->
-            </Form>
-
-            <!-- </div> -->
-          </div>
+                </div>
+                </div>	
+                <div class="form-group">
+            <div v-if="message" class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+            
         </div>
-
-        <div class="col-md-4">
-          <h2>Gift of quality time</h2>
-          <img
-            id="profile-img2"
-            src="https://i.postimg.cc/WbQ4NJhm/hiswatch.jpg"
-            class="profile-img-card"
-          />
+        <div class="signUp">
+            
+             <h4> Don't have an account yet?<router-link :to="{ name: 'Register'}"> Sign Up</router-link></h4>
         </div>
-      </div>
-    </div>
-  </div>
-</template>
+        
+       
+      </Form>
+	</div>
+</div>
+</template>	
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+
 export default {
   name: "Login",
   components: {
@@ -75,8 +64,8 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      name: yup.string().required("username is required"),
-      password: yup.string().required("Password is required"),
+    name: yup.string().required("username is required"),
+    password: yup.string().required("Password is required")
     });
     return {
       loading: false,
@@ -89,8 +78,8 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     },
   },
-  created() {
-    if (!this.loggedIn) {
+   created() {
+    if (this.loggedIn) {
       this.$router.push("/profile");
     }
   },
@@ -116,93 +105,167 @@ export default {
 };
 </script>
 
-
 <style scoped>
-.form-bg {
-  padding-top: 70px;
+.container{
+	padding-top:100px ;
 }
 
-.profile-img {
-  padding-left: 290px;
+.main {
+	width: 390px;
+	height: 550px;
+	background: #fff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 0 20px rgb(255, 72, 72);
+	        box-shadow: 0 0 20px rgb(255, 72, 72);
 }
-.demo {
-  background: #f2f2f2;
+.logo {
+	top: 50px;
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	background: #000;
+	position: relative;
+	border-radius: 100px;
+	-webkit-transition: 200ms ease-in-out;
+	-o-transition: 200ms ease-in-out;
+	transition: 200ms ease-in-out;
+	-webkit-animation: rotation 10s infinite linear;
+	-webkit-box-shadow: 0 0 100px #db2e2eb6;
+	        box-shadow: 0 0 100px #db2e2eb6;
+	background: #db2e2eb6;  
+	background: -webkit-linear-gradient(to right, #ff0000, #db2e2eb6);  
+	background: linear-gradient(to right, #ff0000, #db2e2eb6); 
+
 }
-.form-container {
-  background: #ecf0f3;
-  font-family: "Nunito", sans-serif;
-  padding: 40px;
-  /* border-radius: 20px; */
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+.logo:hover {
+	-webkit-animation: rotation 0.9s infinite linear;
+	-webkit-box-shadow: 0 0 10px #ff0000;
+	        box-shadow: 0 0 10px #ff0000;
 }
-.form-container .form-icon {
-  color: #fa211ac7;
-  font-size: 55px;
-  text-align: center;
-  line-height: 100px;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 15px;
-  /* border-radius: 50px; */
-  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
+.logo h1 {
+	color: #fff;
+	font-size: 70px;
+	font-weight: 200;
+	line-height: 100px;
 }
-.form-container .title {
-  color: #fa211aa9;
-  font-size: 25px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-  margin: 0 0 20px;
+Form {
+	top: 100px;
+	position: relative;
 }
-.form-container .form-horizontal .form-group {
-  margin: 0 0 25px 0;
+.form-group {
+	display: block;
+	margin: 10px auto;
 }
-.form-container .form-horizontal .form-group label {
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
+
+form h4 {
+	font-size: 12px;
+	margin-top: 50px;
 }
-.form-container .form-horizontal .form-control {
-  color: #333;
-  background: #ecf0f3;
-  font-size: 15px;
-  height: 50px;
-  padding: 20px;
-  letter-spacing: 1px;
-  border: none;
-  /* border-radius: 50px; */
-  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
-  display: inline-block;
-  transition: all 0.3s ease 0s;
+
+h4 a {
+	color: #db2e2eb6;
+	font-weight: bold;
+	text-decoration: none;
+	transition: 200ms ease-in-out;
 }
-.form-container .form-horizontal .form-control:focus {
-  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
-  outline: none;
+h4 a:hover {
+	color: #ff0000;
 }
-.form-container .form-horizontal .form-control::placeholder {
-  color: #808080;
-  font-size: 14px;
+input[name="name"], input[name="password"] {
+	width: 60%;
+	outline: none;
+	border-top: 0;
+	color: #ff0000;
+	border-left: 0;
+	border-right: 0;
+	font-size: 14px;
+	padding: 26px;
+	font-weight: 300;
+	border-bottom: 1px solid #db2e2eb6;
 }
-.form-container .form-horizontal .btn {
-  color: #000;
-  background-color: #fa211ab2;
-  font-size: 15px;
-  font-weight: bold;
-  text-transform: uppercase;
-  width: 100%;
-  padding: 12px 15px 11px;
-  /* border-radius: 20px; */
-  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
-  border: none;
-  transition: all 0.5s ease 0s;
+
+
+
+[type='submit'] {
+	color: #fff;
+	width: 150px;
+	height: 50px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size: 16px;
+	margin-top: 50px;
+	border-radius: 4px;
+	transition: 200ms ease-out;
+	-webkit-box-shadow: 0 0 10px #db2e2eb6;
+	        box-shadow: 0 0 10px #db2e2eb6;
+	background: #db2e2eb6; 
+	background: -webkit-linear-gradient(to right, #db2e2eb6, #ff0000);  
+	background: linear-gradient(to right, #db2e2eb6, #ff0000); 
 }
-.form-container .form-horizontal .btn:hover,
-.form-container .form-horizontal .btn:focus {
-  color: #fff;
-  letter-spacing: 3px;
-  box-shadow: none;
-  outline: none;
+
+[type='submit'] :hover {
+	width: 155px;
+	height: 52px;
+	transform: scale(1.1);
+	box-shadow: 0 0 40px #db2e2eb6;
 }
+.fa-user {
+	color: #db2e2eb6;
+  position: absolute;
+  top: 25px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+}
+
+.fa-lock {
+	color: #db2e2eb6;
+  position: absolute;
+  top: 105px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+}
+.fa-redo {
+	color: #db2e2eb6;
+  position: absolute;
+  top: 185px;
+  left: 56px;
+  font-size: 18px !important;
+  cursor: text;
+  transition: .2s ease-out;
+}
+
+
+[placeholder]::-webkit-input-placeholder {
+	color: #db2e2eb6;
+	padding-left: 10px;
+}
+[placeholder]:focus::-webkit-input-placeholder {
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -webkit-transform: translate(10px, 0);
+          transform: translate(10px, 0);
+  opacity: 0;
+}
+ 
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+
 </style>
-

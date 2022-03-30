@@ -1,10 +1,13 @@
 <template>
-  <div class="about-section">
+<div class="boxed">
+<div class="about-section">
     <div class="inner-container">
       <h1>American Sterns</h1>
       <p class="text">The perfect fit for your unique style !...</p>
     </div>
   </div>
+</div>
+  
 </template>
 <script>
 </script>
@@ -22,6 +25,9 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #f1f1f1;
+}
+.boxed{
+  padding-top: 55px;
 }
 
 .about-section {
